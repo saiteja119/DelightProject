@@ -5,15 +5,11 @@ import java.sql.Date;
 public class RawMaterialOrderdto {
 	private String orderid;
 	private String name;
-//	private String supplierId;
+    private String supplierId;
 	private double quantityValue;
-//	private String quantityUnit;
-//	private Date dateOfOrder;
-//	private Date dateOfDelivery;
 	private double pricePerUnit;
 	private double totalPrice;
 //	private String deliveryStatus;
-//	private String warehouseId;
 	public String getOrderid() {
 		return orderid;
 	}
@@ -26,36 +22,19 @@ public class RawMaterialOrderdto {
 	public void setName(String name) {
 		this.name = name;
 	}
-//	public String getSupplierId() {
-//		return supplierId;
-//	}
-//	public void setSupplierId(String supplierId) {
-//		this.supplierId = supplierId;
-//	}
+	public String getSupplierId() {
+		return supplierId;
+	}
+	public void setSupplierId(String supplierId) {
+		this.supplierId = supplierId;
+	}
 	public double getQuantityValue() {
 		return quantityValue;
 	}
 	public void setQuantityValue(double quantityValue) {
 		this.quantityValue = quantityValue;
 	}
-//	public String getQuantityUnit() {
-//		return quantityUnit;
-//	}
-//	public void setQuantityUnit(String quantityUnit) {
-//		this.quantityUnit = quantityUnit;
-//	}
-//	public Date getDateOfOrder() {
-//		return dateOfOrder;
-//	}
-//	public void setDateOfOrder(Date dateOfOrder) {
-//		this.dateOfOrder = dateOfOrder;
-//	}
-//	public Date getDateOfDelivery() {
-//		return dateOfDelivery;
-//	}
-//	public void setDateOfDelivery(Date dateOfDelivery) {
-//		this.dateOfDelivery = dateOfDelivery;
-//	}
+
 	public double getPricePerUnit() {
 		return pricePerUnit;
 	}
@@ -71,13 +50,7 @@ public class RawMaterialOrderdto {
 //	public String getDeliveryStatus() {
 //		return deliveryStatus;
 //	}
-//	public void setDeliveryStatus(String deliveryStatus) {
+//	public void setDeliveryStatus(String deliveryStatus){
 //		this.deliveryStatus = deliveryStatus;
-//	}
-//	public String getWarehouseId() {
-//		return warehouseId;
-//	}
-//	public void setWareHouseId(String warehouseId) {
-//		this.warehouseId = warehouseId;
 //	}
 }
