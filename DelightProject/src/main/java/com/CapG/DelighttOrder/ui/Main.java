@@ -21,12 +21,21 @@ public class Main {
 			stockRepo.getData();
 			RawMaterialPlaceaOrderservice orderservice = new RawMaterialPlaceaOrderservice();
 			RawMaterialOrderdto bean = new RawMaterialOrderdto();
-			bean.setName("orange");
-			bean.setSupplierId("1111");
-			bean.setOrderid("0001");
-			bean.setPricePerUnit(50);
-			bean.setQuantityValue(10);
-			bean.setTotalPrice(bean.getPricePerUnit()*bean.getQuantityValue());
+			System.out.println("Raw Material name");
+			String name=sc.next();
+			bean.setName(name);
+			System.out.println("supplierID");
+			String supplierId =sc.next();
+			bean.setSupplierId(supplierId);
+			System.out.println("PricePerUnit");
+			double price = sc.nextDouble();
+			bean.setPricePerUnit(price);
+			System.out.println("quantity");
+			double quantity =sc.nextDouble();
+			bean.setQuantityValue(quantity);
+			double total = bean.getQuantityValue()*bean.getPricePerUnit();
+			bean.setTotalPrice(total);
+			System.out.println("totalPrice:"+total);
 			if(orderservice.addOrderDetails(bean))
 				System.out.println("entered sucessfully");
 			else
