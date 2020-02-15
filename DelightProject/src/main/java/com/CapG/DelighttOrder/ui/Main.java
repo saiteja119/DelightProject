@@ -28,8 +28,6 @@ public class Main {
 			break;
 		}	
 		}
-		RawMaterialOrderdao dao =new RawMaterialOrderdao();
-		System.out.println(dao.display());
 		sc.close();
 	}
 }

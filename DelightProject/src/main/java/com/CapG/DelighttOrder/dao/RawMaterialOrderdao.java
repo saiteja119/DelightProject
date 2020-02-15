@@ -4,26 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.CapG.DelighttOrder.dto.RawMaterialOrderdto;
+import com.CapG.DelighttOrder.util.RawMaterialOrderrepos;
 
 public class RawMaterialOrderdao {
-
-List<RawMaterialOrderdto> orderList = new ArrayList<RawMaterialOrderdto>();
-	
-	public List<RawMaterialOrderdto> getOrderList() {
-	return orderList;
-}
-
-public void setOrderList(List<RawMaterialOrderdto> orderList) {
-	this.orderList = orderList;
-}
-
 	public boolean addOrder(RawMaterialOrderdto bean)
 	{
-		orderList.add(bean);
-		return true;
-	}
-	public List<RawMaterialOrderdto> display()
-	{
-		return orderList;
+		RawMaterialOrderrepos rawRepo = new RawMaterialOrderrepos();
+		return(rawRepo.repo(bean));
 	}
 }
