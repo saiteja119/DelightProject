@@ -1,6 +1,9 @@
 package com.CapG.DelighttOrder.service;
 
+
+import com.CapG.DelighttOrder.dto.RawMaterialOrderdto;
+
 public interface RawMaterialServices {
-	boolean doesRamMaterialOrderIdExists(String id);
+	boolean addOrderDetails(RawMaterialOrderdto bean);
 	
 }
