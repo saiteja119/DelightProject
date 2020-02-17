@@ -8,7 +8,7 @@ public class RawMaterialOrderdto {
     private String supplierId;
 	private double quantityValue;
 	private double pricePerUnit;
-	private double totalPrice;
+	private double totalPrice; 
 //	private String deliveryStatus;
 	public String getOrderid() {
 		return orderid;

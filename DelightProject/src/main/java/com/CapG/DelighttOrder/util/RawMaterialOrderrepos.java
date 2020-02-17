@@ -21,6 +21,7 @@ public class RawMaterialOrderrepos {
 	}
 	public void display()
 	{
-		System.out.println(rawRepo.get(0).getName()+" "+rawRepo.get(0).getSupplierId());
+		System.out.println(rawRepo.get(0).getName()+" "+rawRepo.get(0).getSupplierId()+" "+rawRepo.get(0).getOrderid());
+		System.out.println(rawRepo.get(1).getName()+" "+rawRepo.get(1).getSupplierId());
 	}
 }

@@ -74,9 +74,15 @@ public class RawMaterialPlaceaOrderservice implements RawMaterialServices {
 		{
 			e.printStackTrace();
 		}
-		//bean.setQuantityValue(quantity);
 		bean.setTotalPrice(total);
+		if(bean.getName()==null || bean.getSupplierId() == null || bean.getPricePerUnit() == 0 || bean.getQuantityValue() == 0 || bean.getTotalPrice() == 0)
+		{
+			return false;
+		}
+		else
+		{
 		return(orderdao.addOrder(bean));
+		}
 	}
 
 }
