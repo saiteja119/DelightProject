@@ -4,14 +4,24 @@ public class RawMaterialStockdto {
 	String name;
 	String supplierId;
 	double pricePerUnit;
+	double quantity;
 	
-	public RawMaterialStockdto(String name,String supplierid,double pricePerUnit)
+
+	public RawMaterialStockdto(String name,String supplierid,double pricePerUnit,double quantity)
 	{
 		this.name = name;
 		this.supplierId = supplierid;
 		this.pricePerUnit = pricePerUnit;
+		this.quantity =quantity;
 	}
-	
+	public double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
+	}
+
 	public String getName() {
 		return name;
 	}

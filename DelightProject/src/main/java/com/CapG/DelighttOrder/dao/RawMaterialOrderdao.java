@@ -12,4 +12,5 @@ public class RawMaterialOrderdao {
 		RawMaterialOrderrepos rawRepo = new RawMaterialOrderrepos();
 		return(rawRepo.repo(bean));
 	}
+	
 }

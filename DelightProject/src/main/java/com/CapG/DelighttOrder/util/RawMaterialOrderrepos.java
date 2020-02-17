@@ -19,4 +19,8 @@ public class RawMaterialOrderrepos {
 		rawRepo.add(bean);
 		return true;
 	}
+	public void display()
+	{
+		System.out.println(rawRepo.get(0).getName()+" "+rawRepo.get(0).getSupplierId());
+	}
 }
