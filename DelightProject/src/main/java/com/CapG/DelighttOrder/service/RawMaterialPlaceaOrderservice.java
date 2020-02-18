@@ -7,82 +7,80 @@ import com.CapG.DelighttOrder.exception.InvalidQuantityException;
 import com.CapG.DelighttOrder.exception.InvalidSupplierIdException;
 import com.CapG.DelighttOrder.util.RamMaterialStockrepos;
 
-public class RawMaterialPlaceaOrderservice implements RawMaterialServices {
+public class RawMaterialPlaceaOrderservice{
 	RawMaterialOrderdao orderdao = new RawMaterialOrderdao();
 	RawMaterialOrderdto bean = new RawMaterialOrderdto();
-	public boolean service(int id,String name,String supplierId,double price,double quantity,double total)
+	RamMaterialStockrepos stock = new RamMaterialStockrepos();
+	public boolean nameValidation(int id,String name) throws InvalidNameException
 	{
-		RamMaterialStockrepos stock = new RamMaterialStockrepos();
 		stock.setData();
-		try
+		if(stock.getStockRepo().get(id).getName().equals(name))
 		{
-			if(stock.getStockRepo().get(id).getName().equals(name))
-			{
-				bean.setName(name);
-			}
-			else
-			{
-				throw new InvalidNameException("Invalid Name");
-			}
-		}
-		catch(InvalidNameException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			if(stock.getStockRepo().get(id).getSupplierId().equals(supplierId))
-			{
-				bean.setSupplierId(supplierId);
-			}
-			else
-			{
-				throw new InvalidSupplierIdException("Invalid SupplierId");
-			}
-		}
-		catch(InvalidSupplierIdException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			if(stock.getStockRepo().get(id).getPricePerUnit() == price)
-			{
-				bean.setPricePerUnit(price);
-			}
-			else
-			{
-				throw new InvalidPriceException("Invalid Price");
-			}
-		}
-		catch(InvalidPriceException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			if(stock.getStockRepo().get(id).getQuantity() >= quantity)
-			{
-				bean.setQuantityValue(quantity);
-			}
-			else
-			{
-				throw new InvalidQuantityException("Quantity Unavaliable");
-			}
-		}
-		catch(InvalidQuantityException e)
-		{
-			e.printStackTrace();
-		}
-		bean.setTotalPrice(total);
-		if(bean.getName()==null || bean.getSupplierId() == null || bean.getPricePerUnit() == 0 || bean.getQuantityValue() == 0 || bean.getTotalPrice() == 0)
-		{
-			return false;
+			bean.setName(name);
+			return true;
 		}
 		else
 		{
-		return(orderdao.addOrder(bean));
+			//return false;
+			throw new InvalidNameException("Invalid Name");
 		}
 	}
 
+	public boolean supplierIdValidation(int id,String supplierId) throws InvalidSupplierIdException
+	{
+		if(stock.getStockRepo().get(id).getSupplierId().equals(supplierId))
+		{
+			bean.setSupplierId(supplierId);
+			return true;
+		}
+		else
+		{
+			return false;
+			//throw new InvalidSupplierIdException("Invalid SupplierId");
+		}
+	}
+	public boolean priceValidation(int id,double price) throws InvalidPriceException
+	{
+		if(stock.getStockRepo().get(id).getPricePerUnit() == price)
+		{
+			bean.setPricePerUnit(price);
+			return true;
+		}
+		else
+		{
+			return false;
+//			throw new InvalidPriceException("Invalid Price");
+		}
+	}
+	public boolean quantityValidation(int id,double quantity) throws InvalidQuantityException
+	{
+		if(stock.getStockRepo().get(id).getQuantity() >= quantity)
+		{
+			bean.setQuantityValue(quantity);
+			return true;
+		}
+		else
+		{
+			return false;
+//			throw new InvalidQuantityException("Quantity Unavaliable");
+		}
+	}
+	public boolean orderId()
+	{
+		StringBuffer strBuff = new StringBuffer();
+		strBuff.append("raw");
+		strBuff.append(bean.getName());
+		String orderid=new String(strBuff);
+		bean.setOrderid(orderid);
+		return true;
+	}
+	public boolean total()
+	{
+		bean.setTotalPrice(bean.getPricePerUnit()*bean.getQuantityValue());
+		return true;
+	}
+	public boolean serviceValidation()
+	{
+		return(orderdao.placeAnOrder(bean));
+	}
 }
