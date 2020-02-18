@@ -13,7 +13,6 @@ public class RawMaterialPlaceaOrderservice{
 	RamMaterialStockrepos stock = new RamMaterialStockrepos();
 	public boolean nameValidation(int id,String name) throws InvalidNameException
 	{
-		stock.setData();
 		if(stock.getStockRepo().get(id).getName().equals(name))
 		{
 			bean.setName(name);
@@ -35,8 +34,8 @@ public class RawMaterialPlaceaOrderservice{
 		}
 		else
 		{
-			return false;
-			//throw new InvalidSupplierIdException("Invalid SupplierId");
+			
+			throw new InvalidSupplierIdException("Invalid SupplierId");
 		}
 	}
 	public boolean priceValidation(int id,double price) throws InvalidPriceException
@@ -48,21 +47,18 @@ public class RawMaterialPlaceaOrderservice{
 		}
 		else
 		{
-			return false;
-//			throw new InvalidPriceException("Invalid Price");
+			throw new InvalidPriceException("Invalid Price");
 		}
 	}
 	public boolean quantityValidation(int id,double quantity) throws InvalidQuantityException
 	{
 		if(stock.getStockRepo().get(id).getQuantity() >= quantity)
 		{
-			bean.setQuantityValue(quantity);
 			return true;
 		}
 		else
 		{
-			return false;
-//			throw new InvalidQuantityException("Quantity Unavaliable");
+			throw new InvalidQuantityException("Quantity Unavaliable");
 		}
 	}
 	public boolean orderId()
@@ -78,9 +74,5 @@ public class RawMaterialPlaceaOrderservice{
 	{
 		bean.setTotalPrice(bean.getPricePerUnit()*bean.getQuantityValue());
 		return true;
-	}
-	public boolean serviceValidation()
-	{
-		return(orderdao.placeAnOrder(bean));
 	}
 }

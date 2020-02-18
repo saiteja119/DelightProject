@@ -4,9 +4,8 @@ import java.util.*;
 import com.CapG.DelighttOrder.dto.RawMaterialStockdto;
 
 public class RamMaterialStockrepos {
-	Map<Integer,RawMaterialStockdto> stockRepo = new LinkedHashMap<Integer,RawMaterialStockdto>();
-	
-	public void setData()
+	static Map<Integer,RawMaterialStockdto> stockRepo = new LinkedHashMap<Integer,RawMaterialStockdto>();
+	static
 	{
 		stockRepo.put(1, new RawMaterialStockdto("kiwi","1111",50,100));
 		stockRepo.put(2, new RawMaterialStockdto("apple","5555",50,500));

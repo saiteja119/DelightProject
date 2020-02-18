@@ -30,7 +30,6 @@ public class Main {
 		case 1:
 		{
 			RamMaterialStockrepos stockRepo = new RamMaterialStockrepos();
-			stockRepo.setData();
 			stockRepo.getData();
 			System.out.println("ID NO:");
 			int id= sc.nextInt();
@@ -76,7 +75,6 @@ public class Main {
 						System.out.println(e);
 					}
 				}
-			loop3:
 				while(true)
 				{
 					System.out.println("quantity");
@@ -84,7 +82,7 @@ public class Main {
 					try
 					{
 						if(orderService.quantityValidation(id,quantity))
-							break loop3;
+							break;
 					}
 					catch(InvalidQuantityException e)
 					{
@@ -99,8 +97,6 @@ public class Main {
 				{
 					System.out.println("error occured");
 				}
-				orderService.total();
-				orderService.orderId();
 				continue;
 			}
 		case 2:
