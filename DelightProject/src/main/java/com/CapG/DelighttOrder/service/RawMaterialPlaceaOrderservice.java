@@ -75,4 +75,11 @@ public class RawMaterialPlaceaOrderservice{
 		bean.setTotalPrice(bean.getPricePerUnit()*bean.getQuantityValue());
 		return true;
 	}
+
+	public boolean serviceValidation() {
+		System.out.println("service");
+		orderdao.placeAnOrder(bean);
+		return true;
+	}
+	
 }

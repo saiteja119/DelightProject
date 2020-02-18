@@ -9,8 +9,9 @@ import com.CapG.DelighttOrder.util.RawMaterialOrderrepos;
 public class RawMaterialOrderdao {
 	public boolean placeAnOrder(RawMaterialOrderdto bean)
 	{
+		System.out.println("dao");
 		RawMaterialOrderrepos rawRepo = new RawMaterialOrderrepos();
-		rawRepo.getRawRepo().add(bean);
+		RawMaterialOrderrepos.getRawRepo().add(bean);
 		return true;
 	}	
 }

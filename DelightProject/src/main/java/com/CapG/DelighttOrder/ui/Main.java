@@ -33,72 +33,74 @@ public class Main {
 			stockRepo.getData();
 			System.out.println("ID NO:");
 			int id= sc.nextInt();
-				while(true)
+			while(true)
+			{
+				System.out.println("Raw Material name");
+				String name=sc.next();
+				try
 				{
-					System.out.println("Raw Material name");
-					String name=sc.next();
-					try
-					{
-						if(orderService.nameValidation(id,name))
-							break;
-					}
-					catch(InvalidNameException e)
-					{
-						System.out.println(e);
-					}
+					if(orderService.nameValidation(id,name))
+						break;
 				}
-				while(true)
+				catch(InvalidNameException e)
 				{
-					System.out.println("supplierID");
-					String supplierId =sc.next();
-					try
-					{
-						if(orderService.supplierIdValidation(id,supplierId))
-							break;
-					}
-					catch(InvalidSupplierIdException e)
-					{
-						System.out.println(e);
-					}
+					System.out.println(e);
 				}
-				while(true)
+				}
+			while(true)
+			{
+				System.out.println("supplierID");
+				String supplierId =sc.next();
+				try
 				{
-					System.out.println("PricePerUnit");
-					double price = sc.nextDouble();
-					try
-					{
-						if(orderService.priceValidation(id,price))
-							break;
-					}
-					catch(InvalidPriceException e)
-					{
-						System.out.println(e);
-					}
+					if(orderService.supplierIdValidation(id,supplierId))
+						break;
 				}
-				while(true)
+				catch(InvalidSupplierIdException e)
 				{
-					System.out.println("quantity");
-					double quantity =sc.nextDouble();
-					try
-					{
-						if(orderService.quantityValidation(id,quantity))
-							break;
-					}
-					catch(InvalidQuantityException e)
-					{
-						System.out.println(e);
-					}
+					System.out.println(e);
 				}
-				if(orderService.serviceValidation())
-				{
-					System.out.println("entered sucessfully");
-				}
-				else
-				{
-					System.out.println("error occured");
-				}
-				continue;
 			}
+			while(true)
+			{
+				System.out.println("PricePerUnit");
+				double price = sc.nextDouble();
+				try
+				{
+					if(orderService.priceValidation(id,price))
+						break;
+				}
+				catch(InvalidPriceException e)
+				{
+					System.out.println(e);
+				}
+			}
+			while(true)
+			{
+				System.out.println("quantity");
+				double quantity =sc.nextDouble();
+				try
+				{
+					if(orderService.quantityValidation(id,quantity))
+						break;
+				}
+				catch(InvalidQuantityException e)
+				{
+					System.out.println(e);
+				}
+			}
+			orderService.orderId();
+			orderService.total();
+			if(orderService.serviceValidation())
+			{
+				System.out.println("entered sucessfully");
+			}
+			else
+			{
+				System.out.println("error occured");
+			}
+			continue;
+		}
 		case 2:
 		{
 			
