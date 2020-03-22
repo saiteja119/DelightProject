@@ -1,42 +1,64 @@
 package com.CapG.DelighttOrder.ui;
 
 import java.util.*;
-
-import com.CapG.DelighttOrder.dao.RawMaterialOrderdao;
 import com.CapG.DelighttOrder.dto.RawMaterialOrderdto;
+import com.CapG.DelighttOrder.dto.RawMaterialStockdto;
+import com.CapG.DelighttOrder.exception.InvalidIdException;
 import com.CapG.DelighttOrder.exception.InvalidNameException;
 import com.CapG.DelighttOrder.exception.InvalidPriceException;
 import com.CapG.DelighttOrder.exception.InvalidQuantityException;
 import com.CapG.DelighttOrder.exception.InvalidSupplierIdException;
 import com.CapG.DelighttOrder.service.*;
-import com.CapG.DelighttOrder.util.RamMaterialStockrepos;
-import com.CapG.DelighttOrder.util.RawMaterialOrderrepos;
 
 public class Main {
-
 	public static void main(String[] args) throws Exception {
-		Scanner sc = new Scanner(System.in);
-		RawMaterialPlaceaOrderservice orderService = new RawMaterialPlaceaOrderservice();
+		Scanner scan = new Scanner(System.in);
+		RawMaterialServices orderService = new RawMaterialPlaceaOrderservice();
 		RawMaterialOrderdto bean = new RawMaterialOrderdto();
-		RawMaterialOrderrepos orderRepo = new RawMaterialOrderrepos();
-		int i=100;
+		int loop1=100;
+		String name;
+		String supplierId;
+		double price;
+		double quantity;
+		String orderid;
 		while(true)
 		{
+		System.out.println("------------------------------");
 		System.out.println("1:Place An Order");
-		System.out.println("2:Update");
-		System.out.println("3:Break");
-		int input =sc.nextInt();
+		System.out.println("2:Display Order Details");
+		System.out.println("3:Update");
+		System.out.println("4:Break");
+		System.out.println("------------------------------");
+		int input =scan.nextInt();
 		switch(input) {
 		case 1:
 		{
-			RamMaterialStockrepos stockRepo = new RamMaterialStockrepos();
-			stockRepo.getData();
-			System.out.println("ID NO:");
-			int id= sc.nextInt();
+			Map<Integer,RawMaterialStockdto> map1 = orderService.getMap();
+			System.out.println("-------------------------------------------");
+			for(Map.Entry<Integer,RawMaterialStockdto> map: map1.entrySet())
+			{
+				System.out.println(map.getKey()+" "+map.getValue().getName()+"  "+map.getValue().getSupplierId()+" "+map.getValue().getPricePerUnit()+" "+map.getValue().getQuantity());
+			}
+			System.out.println("--------------------------------------------");
+			int id;
+			while(true)
+			{
+				System.out.println("ID NO:");
+				id= scan.nextInt();
+			try
+			{
+				if(orderService.idValidation(id))
+					break;
+			}
+			catch(InvalidIdException e)
+			{
+				System.out.println(e.getMessage());
+			}
+			}
 			while(true)
 			{
 				System.out.println("Raw Material name");
-				String name=sc.next();
+				name=scan.next();
 				try
 				{
 					if(orderService.nameValidation(id,name))
@@ -44,27 +66,27 @@ public class Main {
 				}
 				catch(InvalidNameException e)
 				{
-					System.out.println(e);
+					System.out.println(e.getMessage());
 				}
 				}
 			while(true)
 			{
 				System.out.println("supplierID");
-				String supplierId =sc.next();
+				supplierId =scan.next();
 				try
 				{
 					if(orderService.supplierIdValidation(id,supplierId))
 						break;
 				}
 				catch(InvalidSupplierIdException e)
-				{
-					System.out.println(e);
+				{ 
+					System.out.println(e.getMessage());
 				}
 			}
 			while(true)
 			{
 				System.out.println("PricePerUnit");
-				double price = sc.nextDouble();
+				price = scan.nextDouble();
 				try
 				{
 					if(orderService.priceValidation(id,price))
@@ -72,13 +94,13 @@ public class Main {
 				}
 				catch(InvalidPriceException e)
 				{
-					System.out.println(e);
+					System.out.println(e.getMessage());
 				}
 			}
 			while(true)
 			{
 				System.out.println("quantity");
-				double quantity =sc.nextDouble();
+				quantity =scan.nextDouble();
 				try
 				{
 					if(orderService.quantityValidation(id,quantity))
@@ -86,12 +108,28 @@ public class Main {
 				}
 				catch(InvalidQuantityException e)
 				{
-					System.out.println(e);
+					System.out.println(e.getMessage());
 				}
 			}
-			orderService.orderId();
-			orderService.total();
-			if(orderService.serviceValidation())
+			while(true)
+			{
+				StringBuilder sb = new StringBuilder();
+				sb.append("raw");
+				sb.append(name);
+				sb.append(++loop1);
+				orderid = sb.toString();
+			if(orderService.orderIdValidation(id, orderid,name))
+			{
+				break ;
+			}
+			}
+			bean.setId(id);
+			bean.setName(name);
+			bean.setSupplierId(supplierId);
+			bean.setPricePerUnit(price);
+			bean.setQuantityValue(quantity);
+			bean.setOrderid(orderid);
+			if(orderService.placeOrder(bean))
 			{
 				System.out.println("entered sucessfully");
 			}
@@ -102,14 +140,19 @@ public class Main {
 			continue;
 		}
 		case 2:
-		{
-			
-		}
+			System.out.println("Enter Id");
+			String orderId = scan.next();
+			orderService.displayOrderDetails(orderId);
+			continue;
 		case 3:
+			System.out.println("Enter Id");
+			String orderID =scan.next();
+			orderService.updateOrderDetails(orderID);
+			continue;
+		case 4:
 			break;
 		}
 		break;
 	}
-	orderRepo.display();
 	}
 }

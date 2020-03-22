@@ -4,6 +4,7 @@ import java.util.*;
 import com.CapG.DelighttOrder.dto.RawMaterialStockdto;
 
 public class RamMaterialStockrepos {
+	
 	static Map<Integer,RawMaterialStockdto> stockRepo = new LinkedHashMap<Integer,RawMaterialStockdto>();
 	static
 	{
@@ -13,18 +14,7 @@ public class RamMaterialStockrepos {
 		stockRepo.put(4, new RawMaterialStockdto("banana","3333",50,400)); 
 		stockRepo.put(5, new RawMaterialStockdto("pineapple","2222",50,300));
 	}
-	public void getData()
-	{
-		for(Map.Entry<Integer,RawMaterialStockdto> map: stockRepo.entrySet())
-		{
-			System.out.println(map.getKey()+"  "+map.getValue().getSupplierId()+" "+map.getValue().getName()+" "+map.getValue().getPricePerUnit()+" "+map.getValue().getQuantity());
-		}
-	}
-	public Map<Integer, RawMaterialStockdto> getStockRepo() {
+	static public Map<Integer, RawMaterialStockdto> getStockRepo() {
 		return stockRepo;
-	}
-	public void display()
-	{
-		System.out.println(stockRepo);
 	}
 }
